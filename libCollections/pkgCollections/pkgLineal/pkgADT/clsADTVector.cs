@@ -11,7 +11,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
     {
         #region Attributes
         protected int attTotalCapacity = 100;
-        protected static int attMaxCapacity = int.MaxValue / 16;
+       
         protected T[] attItems = new T[100];
         protected bool attItsFlexible = false;
         protected int attGrowingFactor = 100;
@@ -29,6 +29,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
                 if (prmCapacity == attMaxCapacity) attGrowingFactor = 0;
                 attTotalCapacity = prmCapacity;
                 attItems = new T[prmCapacity];
+               
             }
             catch (Exception)
             {
@@ -92,22 +93,19 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
                 return attGrowingFactor;
             }
         }
+       
         public int opGetAvailableCapacity()
         {
-            int attLength = attItems.Length;
             int attItemsCount = 0;
-
-            for (int i = 0; i < attLength; i++)
-            {
-                if (attItems[i] == null)
+            
+                for (int i = 0; i < attItems.Length; i++)
                 {
                     attItemsCount++;
                 }
-            }
-
-            return attLength - attItemsCount;
+                return attItems.Length - prmItemsCount;
 
         }
+
         public static int opGetMaxCapacity()
         {
             return attMaxCapacity;
@@ -119,7 +117,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
             attGrowingFactor = prmValue;
             return true;
         }
-        public bool opSetCapacity(int prmValue)
+        public bool opSetTotalCapacity(int prmValue)
         {
             attTotalCapacity = prmValue;
             return true;
@@ -138,7 +136,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
         #region Query
         public bool opItsFull()
         {
-            throw new NotImplementedException();
+            return attLength == attTotalCapacity;
         }
         public bool opItsFlexible()
         {
@@ -156,36 +154,42 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
         #region Serialize/Deserialize
         public override T[] opToArray()
         {
-
-            T[] result = new T[attTotalCapacity];
-            for (int i = 0; i < attTotalCapacity; i++)
-            {
-                result[i] = attItems[i];
-            }
-            return result;
-            //return attItems;
+             T[] result = new T[attTotalCapacity];
+             for (int i = 0; i < attTotalCapacity; i++)
+             {
+                 result[i] = attItems[i];
+             }
+             return result;
         }
+
         public override bool opToItems(T[] prmArray)
         {
-            try
-            {
-                attItems = prmArray;
-                attTotalCapacity = prmArray.Length;
-                base.attLength = attItems.Length;
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+            if (prmArray == null) return false;
+            if (prmArray.Length == 0) return false;
+            if (prmArray.Length > attMaxCapacity) return false;
+            attItems = prmArray;
+            attLength = attItems.Length;
+            attTotalCapacity = attItems.Length;
+            if (attMaxCapacity - attLength < 100)
+                attGrowingFactor = attMaxCapacity - attLength;
+            attItsOrderedAscending = false;
+            attItsOrderedDescending = false;
+            return true;
         }
 
         public bool opToItems(T[] prmArray, int prmItemsCount)
         {
+            if (prmArray == null) return false;
+            if (prmArray.Length == 0) return false;
+            if (prmArray.Length > attMaxCapacity) return false;
+            if (prmItemsCount < 0) return false;
+            if(attMaxCapacity-attLength<100)
+                attGrowingFactor = attMaxCapacity - attLength;
             attItems = prmArray;
             attTotalCapacity = prmArray.Length;
             attLength = prmItemsCount;
             return true;
+
         }
         #endregion
         #region 
@@ -197,10 +201,6 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
             return true;
         }
 
-        public bool opSetTotalCapacity(int prmValue)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
         #endregion
     }

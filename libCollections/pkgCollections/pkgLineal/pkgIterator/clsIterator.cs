@@ -27,11 +27,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgIterator
         #endregion
         public virtual bool opGo(int prmIdx)
         {
-            if (!opIsValid(prmIdx)) return false;
-            opGoFirst();
-            while (attCurrentIdx < prmIdx)
-                opGoNext();
-            return true;
+            throw new NotImplementedException();
         }
 
         public void opGoBack()
@@ -59,9 +55,37 @@ namespace libCollections.pkgCollections.pkgLineal.pkgIterator
             throw new NotImplementedException();
         }
 
+        public bool opGoNext(T[] attItems)
+        {
+            if (attCurrentIdx < attLength - 1)
+            {
+                attCurrentIdx++;
+                attCurrentItem = attItems[attCurrentIdx];
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool opGoNext()
         {
             throw new NotImplementedException();
+        }
+
+        public bool opGoPrevious(T[] attItems)
+        {
+            if (attCurrentIdx > 0)
+            {
+                attCurrentIdx--;
+                attCurrentItem = attItems[attCurrentIdx];
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool opGoPrevious()

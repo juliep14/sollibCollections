@@ -12,9 +12,10 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
     public class clsADTLineal<T> : clsIterator<T>, iADTLineal<T> where T : IComparable<T>
     {
         #region Attributes
+        protected static int attMaxCapacity = int.MaxValue / 16;
         protected bool attItsOrderedAscending = false;
         protected bool attItsOrderedDescending = false;
-        private int prmItemsCount = 0;
+        protected int prmItemsCount = 0;
         protected T[] prmArray = new T[100];
         public clsADTLineal()
         {
@@ -43,10 +44,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
         {
             throw new NotImplementedException();
         }
-        /*public virtual bool opToItems(T[] prmArray, int prmItemsCount)
-        {
-            throw new NotImplementedException();
-        }*/
+
         #endregion
         #region CRUDs
         public virtual bool opModify(int prmIdx, T prmItem)
@@ -155,11 +153,11 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
                 opGoNext();
             return true;
         }
-
         public bool opToItems(T[] prmItems, int prmItemsCount)
         {
             throw new NotImplementedException();
         }
+
 
 
         #endregion

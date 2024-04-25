@@ -397,6 +397,7 @@ namespace uTestCollections
             testExpectedItem = default;
             #endregion
             #region Test & Assert
+            Assert.AreEqual(1, testMyStack.opGetAvailableCapacity());
             Assert.IsTrue(testMyStack.opPeek(ref testExpectedItem));
             Assert.AreEqual(1, testExpectedItem);
             Assert.AreEqual(3, testMyStack.opGetLength());

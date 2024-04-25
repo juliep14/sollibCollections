@@ -34,9 +34,21 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
                     attTotalCapacity = 100;
                     attGrowingFactor = 100;
                 }
+                if (prmCapacity == attMaxCapacity)
+                {
+                    prmCapacity = attMaxCapacity;
+                    attTotalCapacity = attMaxCapacity;
+                    attGrowingFactor = 0;
+                }
+                if (prmCapacity == (attMaxCapacity - 1))
+                {
+                    attGrowingFactor = 1;
+                    attTotalCapacity = (attMaxCapacity - 1);
+                }
 
                 if (attLength < 0) attLength = 0;
                 attItems = new T[prmCapacity];
+                attTotalCapacity = prmCapacity;
             }
             catch
             {
@@ -46,7 +58,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
                 attItsFlexible = false;
                 attGrowingFactor = 100;
             }
-            attGrowingFactor = 100;
+
         }
         #endregion
 
@@ -56,9 +68,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
         {
             if (attLength == attTotalCapacity)
             {
-                Console.WriteLine("IT'S NOT POSSIBLE TO ADD THE ITEM, QUEUE IS FULL");
                 return false;
-
             }
             else
             {
@@ -66,7 +76,6 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
                 attItems[attLength - 1] = prmItem;
                 return true;
             }
-
         }
 
         public bool opPop(ref T prmItem)

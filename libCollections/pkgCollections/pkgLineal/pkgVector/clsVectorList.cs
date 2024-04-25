@@ -36,9 +36,21 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
                     attTotalCapacity = 100;
                     attGrowingFactor = 100;
                 }
+                if (prmCapacity == attMaxCapacity)
+                {
+                    prmCapacity = attMaxCapacity;
+                    attTotalCapacity = attMaxCapacity;
+                    attGrowingFactor = 0;
+                }
+                if (prmCapacity == (attMaxCapacity - 1))
+                {
+                    attGrowingFactor = 1;
+                    attTotalCapacity = (attMaxCapacity - 1);
+                }
 
                 if (attLength < 0) attLength = 0;
                 attItems = new T[prmCapacity];
+                attTotalCapacity = prmCapacity;
             }
             catch
             {
@@ -48,6 +60,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
                 attItsFlexible = false;
                 attGrowingFactor = 100;
             }
+
         }
         #endregion
         #region CRUDs
@@ -56,11 +69,12 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
             if (attLength == attTotalCapacity)
             {
                 return false;
+
             }
             else
             {
-                attItems[attLength] = prmItem;  
-                attLength++;                    
+                attLength++;
+                attItems[attLength - 1] = prmItem;
                 return true;
             }
         }
@@ -114,14 +128,12 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
 
         public bool opRemove(int Idx, ref T prmItem)
         {
-            if (attLength == 0) return false;
-            prmItem = attItems[Idx];
-            for (int j = Idx; j < attLength - 1; j++)
+            if (attLength > 0)
             {
-                attItems[j] = attItems[j + 1];
+                attItems[--attLength] = default;
+                return true;
             }
-            attLength--;
-            return true;
+            return false;
 
         }
 
