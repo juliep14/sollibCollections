@@ -58,6 +58,8 @@
     <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iQueue.cs" />
     <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iStack.cs" />
     <Compile Include="pkgCollections\pkgLineal\pkgIterator\clsIterator.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgLinked\clsLinkedList.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgLinked\clsLinkedQueue.cs" />
     <Compile Include="pkgCollections\pkgLineal\pkgLinked\clsLinkedStack.cs" />
     <Compile Include="pkgCollections\pkgLineal\pkgVector\clsVectorList.cs" />
     <Compile Include="pkgCollections\pkgLineal\pkgVector\clsVectorQueue.cs" />

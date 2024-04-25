@@ -15,7 +15,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgInterfaces
         #endregion
         #region Setters
         bool opSetGrowingFactor(int prmValue);
-        bool opSetCapacity(int prmValue);
+        bool opSetTotalCapacity(int prmValue);
         #endregion
         #region Query
         bool opItsFull();

@@ -109,6 +109,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
             attItsOrderedDescending = true;
             return attItsOrderedDescending;
         }
+ 
         public bool opItsOrderedDescending()
         {
             attLength = prmArray.Length;
@@ -159,6 +160,8 @@ namespace libCollections.pkgCollections.pkgLineal.pkgADT
         {
             throw new NotImplementedException();
         }
+
+
         #endregion
     }
 }

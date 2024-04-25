@@ -21,7 +21,7 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
             }
             else
             {
-                prmItem = attItems[0];
+                prmItem = attItems[attLength - 1];
                 return true;
             }
 
@@ -71,13 +71,23 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
         }
 
         #endregion
-
         #region Builders
         public clsVectorStack(int prmCapacity) : base(prmCapacity)
         {
-            //attItems = new T[prmCapacity];
             try
             {
+                if (prmCapacity < 0)
+                {
+                    prmCapacity = 100;
+                    attTotalCapacity = 100;
+                }
+                if (prmCapacity == 0)
+                {
+                    prmCapacity = 100;
+                    attTotalCapacity = 100;
+                    attGrowingFactor = 100;
+                }
+
                 if (attLength < 0) attLength = 0;
                 attItems = new T[prmCapacity];
             }
@@ -89,13 +99,21 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
                 attItsFlexible = false;
                 attGrowingFactor = 100;
             }
+            attGrowingFactor = 100;
+    
         }
 
         public clsVectorStack()
         {
-
+            attItsFlexible = false;
+            attItems = new T[100];
+            attLength = 0;
+            attTotalCapacity = 100;
         }
         #endregion
+
+
+
 
     }
 }

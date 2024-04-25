@@ -18,35 +18,90 @@ namespace libCollections.pkgCollections.pkgLineal.pkgVector
             attLength = 0;
             attTotalCapacity = 100;
         }
-        public clsVectorQueue(int prmCapacity) 
+
+        public clsVectorQueue(int prmCapacity)
         {
-            if (prmCapacity <= 0)
+            try
             {
-                prmCapacity = 0;
-                throw new ArgumentException("La capacidad no puede ser negativa.", nameof(prmCapacity));
-            }
-            else
-            {
+                if (prmCapacity < 0)
+                {
+                    prmCapacity = 100;
+                    attTotalCapacity = 100;
+                }
+                if (prmCapacity == 0)
+                {
+                    prmCapacity = 100;
+                    attTotalCapacity = 100;
+                    attGrowingFactor = 100;
+                }
+
+                if (attLength < 0) attLength = 0;
                 attItems = new T[prmCapacity];
             }
+            catch
+            {
+                attTotalCapacity = 100;
+                attMaxCapacity = int.MaxValue / 16;
+                attItems = new T[100];
+                attItsFlexible = false;
+                attGrowingFactor = 100;
+            }
+            attGrowingFactor = 100;
         }
-         
         #endregion
+
         #region CRUDs
 
         public bool opPush(T prmItem)
         {
-            return true;
+            if (attLength == attTotalCapacity)
+            {
+                Console.WriteLine("IT'S NOT POSSIBLE TO ADD THE ITEM, QUEUE IS FULL");
+                return false;
+
+            }
+            else
+            {
+                attLength++;
+                attItems[attLength - 1] = prmItem;
+                return true;
+            }
+
         }
 
         public bool opPop(ref T prmItem)
         {
-            return true;
+            if (attLength != 0)
+            {
+                attLength--;
+                prmItem = attItems[0];
+                for (int i = 0; i < attLength; i++)
+                {
+                    attItems[i] = attItems[i + 1];
+                }
+
+                return true;
+            }
+            else
+            {
+                prmItem = default;
+                return false;
+            }
+
         }
 
         public bool opPeek(ref T prmItem)
         {
-            return true;
+            if (attLength == 0)
+            {
+                prmItem = default;
+                return false;
+            }
+            else
+            {
+                prmItem = attItems[attLength - 1];
+                return true;
+            }
         }
         #endregion
     }

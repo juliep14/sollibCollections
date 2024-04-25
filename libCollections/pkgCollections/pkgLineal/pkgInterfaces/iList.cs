@@ -9,9 +9,9 @@ namespace libCollections.pkgCollections.pkgLineal.pkgInterfaces
     public interface iList<T> where T:IComparable<T>
     {
         #region CRUDs
-        bool opAdd(ref T prmItem);
-        bool opInsert(ref int ldx, T prmItem);
-        bool opRemove(ref int ldx, T prmItem);
+        bool opAdd(T prmItem);
+        bool opInsert(int ldx, T prmItem);
+        bool opRemove(int ldx,ref T prmItem);
         #endregion
     }
 }

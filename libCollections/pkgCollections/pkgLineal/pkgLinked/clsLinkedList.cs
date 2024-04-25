@@ -1,11 +1,14 @@
 ﻿using libCollections.pkgCollections.pkgLineal.pkgADT;
 using libCollections.pkgCollections.pkgLineal.pkgInterfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-
-namespace libCollections.pkgCollections.pkgLineal.pkgDoubleLinked
+namespace libCollections.pkgCollections.pkgLineal.pkgLinked
 {
-    public class clsDoubleLinkedList<T> : clsADTDoubleLinked<T>, iList<T> where T : IComparable<T>
+    public class clsLinkedList<T> : clsADTLinked<T>, iList<T> where T : IComparable<T>
     {
         public bool opAdd(ref T prmItem)
         {
